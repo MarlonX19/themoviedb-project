@@ -35,7 +35,7 @@ function Details() {
                 <h3>Informações</h3>
                 <hr></hr>
                 <MovieGenreContainer>
-                  {movieDetails?.genres.map((genreId) => {
+                  {movieDetails?.genres?.map((genreId) => {
                     return (
                       <MovieGenreComponent key={genreId}>
                         <span >
