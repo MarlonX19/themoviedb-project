@@ -1,18 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import MovieGenreComponent from '../movieGenreComponent';
+import MovieGenreContainer from '../movieGenreContainer';
 import useMoviesContext from '../../hooks/useMoviesContext';
-import { CardPercentageInfo, CardPercentageInfoContainer, MovieGenreComponent, MovieGenreContainer, CardBottomUpperInfo, CardBottomLowInfo, CardContainer, Card, CardImage, CardContentContainer, CardTopContent, CardBottomContent } from './styles';
+import { CardPercentageInfo, CardPercentageInfoContainer, CardBottomUpperInfo, CardBottomLowInfo, CardContainer, Card, CardImage, CardContentContainer, CardTopContent, CardBottomContent } from './styles';
 
 const SERVER_URL_IMG = 'https://image.tmdb.org/t/p/w200/';
 
 function CardList({ movie }) {
   const { genres } = useMoviesContext();
+  const navigation = useNavigate();
 
   if (!movie) {
     return null;
   }
 
   return (
-    <CardContainer>
+    <CardContainer role='button' onClick={() => navigation(`/details?movie=${movie.id}`)} >
       <Card>
         <CardImage
           src={`${SERVER_URL_IMG}${movie?.poster_path}`}

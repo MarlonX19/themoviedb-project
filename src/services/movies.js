@@ -39,3 +39,14 @@ export const fetchMovie = async (movieSearchKeyword) => {
     return error.response;
   }
 }
+
+export const fetchMovieDetails = async (movieId) => {
+  try {
+    const response = await api.get(`/movie/${movieId}?api_key=${REACT_APP_API_KEY}&language=${REACT_APP_DEFAULT_LANG}`);
+
+    return response;
+
+  } catch (error) {
+    return error.response;
+  }
+}

@@ -7,6 +7,10 @@ export const CardContainer = styled.div`
   flex-direction: row;
 
   margin-bottom: 30px;
+
+  & :hover {
+    cursor: pointer;
+  }
 `;
 
 export const Card = styled.div`
@@ -65,29 +69,6 @@ export const CardBottomLowInfo = styled.div`
   & p {
     color: #383636;
   }
-`;
-
-export const MovieGenreContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-`;
-
-export const MovieGenreComponent = styled.div`
-  padding: 3px 12px;
-  background-color: #fff;
-  border: 1px solid #1068bf;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 5px;
-
-  & span {
-    color: #1068bf;
-  }
-
 `;
 
 export const CardPercentageInfoContainer = styled.div`

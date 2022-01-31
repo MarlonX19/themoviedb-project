@@ -4,13 +4,15 @@ import { MoviesContext } from '../context/moviesContext';
 
 
 function useMoviesContext() {
-  const { movies, genres, handleFetchMovie, handleFetchAllMovies } = useContext(MoviesContext);
+  const { movies, genres, handleFetchMovie, handleFetchAllMovies, handleFetchMovieDetails, movieDetails } = useContext(MoviesContext);
 
   return {
     movies,
     genres,
     handleFetchMovie,
-    handleFetchAllMovies
+    handleFetchAllMovies,
+    handleFetchMovieDetails,
+    movieDetails
   }
 }
 
