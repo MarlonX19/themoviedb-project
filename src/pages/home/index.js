@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useMoviesContext from '../../hooks/useMoviesContext';
 
-import { Header, Container, Search, CardComponent, Pagination } from '../../components';
+import { Header, Container, Search, CardComponent, Pagination, NotFoundComponent } from '../../components';
 
 const LIMIT = 20;
 
@@ -19,12 +19,11 @@ function Home() {
       <Container>
         <Search />
         {
-          results && results.map((movie, index) => {
-
-            return (
+          results && results.length > 0 ? (
+            results.map(movie =>
               <CardComponent key={movie.id} movie={movie} />
             )
-          })
+          ) : <NotFoundComponent />
         }
         <CardComponent />
         <Pagination
