@@ -69,3 +69,24 @@ export const CardImageContent = styled.div`
   }
 `;
 
+export const InformationComponentContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0px;
+`;
+
+export const InformationComponent = styled.div`
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  padding-right: 10px;
+
+  & h4 {
+    text-align: center;
+    color: #1068bf;
+  }
+`;
+

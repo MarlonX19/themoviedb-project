@@ -3,12 +3,13 @@ import { useLocation } from 'react-router-dom';
 import { Container, Header, MovieGenreComponent, MovieGenreContainer } from '../../components'
 import useMoviesContext from '../../hooks/useMoviesContext';
 
-import { CardContainer, CardTitle, CardContentContainer, CardContent, CardTextContent, CardImageContent } from './styles';
+import { InformationComponent, InformationComponentContainer, CardContainer, CardTitle, CardContentContainer, CardContent, CardTextContent, CardImageContent } from './styles';
 
 const SERVER_URL_IMG = 'https://image.tmdb.org/t/p/w300/';
 
 function Details() {
   const { handleFetchMovieDetails, movieDetails } = useMoviesContext();
+  console.log('===movieDetails', movieDetails)
 
   const location = useLocation();
   const movieId = new URLSearchParams(location.search).get('movie');
@@ -16,6 +17,58 @@ function Details() {
   useEffect(() => {
     handleFetchMovieDetails(movieId)
   }, [movieId])
+
+  const generateLanguageName = (lang) => {
+    if (lang) {
+      return new Intl.DisplayNames(['pt'], { type: 'language' }).of(lang)
+    }
+    return '';
+  }
+
+  const statusObject = {
+    Rumored: 'Não confirmado',
+    Planned: 'Planejado',
+    'In Production': 'Em produção',
+    'Post Production': 'Pós produzido',
+    Released: 'Lançado',
+    Canceled: 'Cancelado'
+  }
+
+  const convertMinutes = (minutes) => {
+    var h = Math.floor(minutes / 60);
+    var m = minutes % 60;
+    h = h < 10 ? '0' + h : h;
+    m = m < 10 ? '0' + m : m;
+    return `${h}h ${m}m`;
+  }
+
+  let arr = [
+    {
+      title: 'Situação',
+      value: statusObject[movieDetails?.status]
+    },
+    {
+      title: 'Idioma',
+      value: generateLanguageName(movieDetails?.original_language)
+    },
+    {
+      title: 'Duração',
+      value: convertMinutes(movieDetails?.runtime)
+    },
+    {
+      title: 'Orçamento',
+      value: `$${new Intl.NumberFormat().format(movieDetails?.budget)}`
+    },
+    {
+      title: 'Receita',
+      value: `$${new Intl.NumberFormat().format(movieDetails?.revenue)}`
+    }
+    ,
+    {
+      title: 'Lucro',
+      value: `$${new Intl.NumberFormat().format(movieDetails?.revenue - movieDetails?.budget)}`
+    }
+  ]
 
   return (
     <>
@@ -34,6 +87,21 @@ function Details() {
                 <p>{movieDetails?.overview}</p>
                 <h3>Informações</h3>
                 <hr></hr>
+                <InformationComponentContainer>
+                  {
+                    arr.map((v, i) => {
+                      return (
+                        <InformationComponent>
+                          <h4>{v.title}</h4>
+                          <span>
+                            {v.value}
+                          </span>
+                        </InformationComponent>
+                      )
+                    })
+                  }
+
+                </InformationComponentContainer>
                 <MovieGenreContainer>
                   {movieDetails?.genres?.map((genreId) => {
                     return (
